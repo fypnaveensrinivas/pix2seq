@@ -165,9 +165,9 @@ class TaskObjectDetection(task_lib.Task):
     config = self.config.task
     mconfig = self.config.model
     example = batched_examples
-    images, image_ids = example['image'], example['image/id']
-    orig_image_size = example['orig_image_size']
-    unpadded_image_size = example['unpadded_image_size']
+    images, image_ids = example[0]['image'], example[0]['image/id']
+    orig_image_size = example[0]['orig_image_size']
+    unpadded_image_size = example[0]['unpadded_image_size']
 
     # Decode sequence output.
     pred_classes, pred_bboxes, scores = task_utils.decode_object_seq_to_bbox(
@@ -187,9 +187,9 @@ class TaskObjectDetection(task_lib.Task):
       scale = tf.expand_dims(scale, 1)
     pred_bboxes_rescaled = utils.scale_points(pred_bboxes, scale)
 
-    gt_classes, gt_bboxes = example['label'], example['bbox']
+    gt_classes, gt_bboxes = example[1]['label'], example[1]['bbox']
     gt_bboxes_rescaled = utils.scale_points(gt_bboxes, scale)
-    area, is_crowd = example['area'], example['is_crowd']
+    area, is_crowd = example[1]['area'], example[1]['is_crowd']
 
     return (images, image_ids, pred_bboxes, pred_bboxes_rescaled, pred_classes,
             scores, gt_classes, gt_bboxes, gt_bboxes_rescaled, area, is_crowd)
