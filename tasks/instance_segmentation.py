@@ -136,7 +136,7 @@ class TaskInstanceSegmentation(task_lib.Task):
       encoded = None
       pred_classes = examples[1]['label']
       pred_bboxes = examples[1]['bbox']
-      scores = tf.where(tf.greater(pred_classes, 0), examples['scores'], 0.)
+      scores = tf.where(tf.greater(pred_classes, 0), examples[1]['scores'], 0.)
     else:
       bsz = tf.shape(image)[0]
       prompt_seq = task_utils.build_prompt_seq_from_task_id(
