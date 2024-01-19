@@ -134,8 +134,8 @@ class TaskInstanceSegmentation(task_lib.Task):
     image, _, examples = preprocessed_outputs  # response_seq unused by default
     if config.use_gt_box_at_test:  # Use gt bbox instead of predicted ones.
       encoded = None
-      pred_classes = examples['label']
-      pred_bboxes = examples['bbox']
+      pred_classes = examples[1]['label']
+      pred_bboxes = examples[1]['bbox']
       scores = tf.where(tf.greater(pred_classes, 0), examples['scores'], 0.)
     else:
       bsz = tf.shape(image)[0]
