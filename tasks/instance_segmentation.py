@@ -195,10 +195,10 @@ class TaskInstanceSegmentation(task_lib.Task):
     """
     config = self.config.task
     mconfig = self.config.model
-    images, image_ids = batched_examples['image'], batched_examples['image/id']
-    image_size_before_cropping = batched_examples['image_size_before_cropping']
-    orig_image_size = batched_examples['orig_image_size']
-    unpadded_image_size = batched_examples['unpadded_image_size']
+    images, image_ids = batched_examples[0]['image'], batched_examples['image/id']
+    image_size_before_cropping = batched_examples[0]['image_size_before_cropping']
+    orig_image_size = batched_examples[0]['orig_image_size']
+    unpadded_image_size = batched_examples[0]['unpadded_image_size']
 
     # Tile image related features to support multiple instances per image.
     bsz = tf.shape(images)[0]
