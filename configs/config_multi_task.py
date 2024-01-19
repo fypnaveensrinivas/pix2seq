@@ -235,9 +235,9 @@ def get_config(config_str=None):
 
       eval=D(
           tag='eval',
-          checkpoint_dir='',
+          #checkpoint_dir='',
         #Uncommented this for multitask
-          #checkpoint_dir=get_multi_task_checkpoint_dir(encoder_variant, image_size),
+          checkpoint_dir=get_multi_task_checkpoint_dir(encoder_variant, image_size),
           batch_size=8,
           steps=0,
       ),
